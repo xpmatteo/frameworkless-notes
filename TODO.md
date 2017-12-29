@@ -1,4 +1,9 @@
 
+on start => copies the main text to the ui
+            copies the titles of all notes to the ui
+            copies the timestamp to the main timestamp in the ui
+            copies the timestamps of all notes to the ui
+
 enter text => title changes
               title changes but only the first line
               timestamp in main text page is updated
