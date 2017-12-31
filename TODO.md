@@ -22,3 +22,8 @@ press new => main text becomes blank
 
 press new, select some other title => the new note title is deleted
                                       the note that was on top before the "new" returns on top
+
+
+searching ...
+saving and loading state to the browser memory
+deleting a note ...

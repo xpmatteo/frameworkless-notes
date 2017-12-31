@@ -1,5 +1,11 @@
 Exercise inspired by https://medium.com/@peterxjang/comparing-frontend-frameworks-part-1-introduction-6cf3d49e42cf
 
+Testing:
+
+    karma start
+
+
+
 
 
 Setting up a new project:
