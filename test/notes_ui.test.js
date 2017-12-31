@@ -39,4 +39,16 @@ describe('The Notes UI Adapter', () => {
     ui.updateTitle(1, 'foobar')
     expect(fixture.getElementsByClassName('note-selector-title')[1].innerText).toEqual('foobar')
   })
+
+  it('clears all titles', () => {
+    ui.clearTitles()
+    expect(fixture.getElementsByClassName('note-selector').length).toBe(0)
+  })
+
+  it('adds one new title', () => {
+    ui.addTitle('foobar')
+    expect(fixture.getElementsByClassName('note-selector').length).toBe(4)
+    expect(fixture.getElementsByClassName('note-selector')[0]
+        .getElementsByClassName('note-selector-title')[0].innerText).toBe('foobar')
+  })
 })

@@ -8,6 +8,7 @@ enter text => title changes
               title changes but only the first line
               timestamp in main text page is updated
               timestamp in title is also updated
+              text does not allow XSS attacks
 
 select title => main text changes
                 selected title becomes active, 

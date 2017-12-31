@@ -8,4 +8,18 @@ class NotesUiAdapter {
     this._document.getElementsByClassName('note-selector-title')[index].innerText = text
   }
 
+  clearTitles() {
+    this._document.getElementsByClassName('note-selectors')[0].innerHTML = ''
+  }
+
+  addTitle(text) {
+    var container = this._document.getElementsByClassName('note-selectors')[0]
+    var newTitle = `
+      <div class="note-selector">
+        <p class="note-selector-title">${text}</p>
+      </div>
+      `
+    container.innerHTML = newTitle + container.innerHTML
+  }
+
 }
