@@ -8,6 +8,7 @@ class NotesApp {
   onAppStart() {
     this._ui.clearTitles()
     this._ui.addTitle('New Note')
+    this._ui.clearMainText()
   }
 
   onInput(text) {

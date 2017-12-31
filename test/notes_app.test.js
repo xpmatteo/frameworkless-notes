@@ -3,7 +3,7 @@ describe('the notes app', () => {
 
   describe('at app start', () => {
     it('when there are no notes', () => {
-      var ui = td.object(['clearTitles', 'addTitle'])
+      var ui = td.object(['clearTitles', 'addTitle', 'clearMainText'])
       var notesApp = new NotesApp(ui) 
 
       notesApp.onAppStart()
@@ -11,6 +11,7 @@ describe('the notes app', () => {
       
       td.verify(ui.clearTitles())
       td.verify(ui.addTitle('New Note'))
+      td.verify(ui.clearMainText())
     })
   })
 

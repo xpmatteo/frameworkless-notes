@@ -50,5 +50,11 @@ describe('The Notes UI Adapter', () => {
     expect(fixture.getElementsByClassName('note-selector').length).toBe(4)
     expect(fixture.getElementsByClassName('note-selector')[0]
         .getElementsByClassName('note-selector-title')[0].innerText).toBe('foobar')
+    expect(fixture.getElementsByClassName('note-selector')[0].classList).toContain('active')
+  })
+
+  it('clears the main text', () => {
+    ui.clearMainText()
+    expect(fixture.getElementsByClassName('note-editor-input')[0].value).toBe('')
   })
 })
