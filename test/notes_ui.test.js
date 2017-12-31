@@ -29,6 +29,14 @@ describe('The Notes UI Adapter', () => {
   var fixture
   var ui
 
+  function $$(className) {
+    return fixture.getElementsByClassName(className)
+  }
+
+  function $(className) {
+    return $$(className)[0]
+  }
+
   beforeEach(() => {
     fixture = document.createElement('div')
     fixture.innerHTML = html;
@@ -37,24 +45,23 @@ describe('The Notes UI Adapter', () => {
 
   it('updates the title', () => {
     ui.updateTitle(1, 'foobar')
-    expect(fixture.getElementsByClassName('note-selector-title')[1].innerText).toEqual('foobar')
+    expect($$('note-selector-title')[1].innerText).toEqual('foobar')
   })
 
   it('clears all titles', () => {
     ui.clearTitles()
-    expect(fixture.getElementsByClassName('note-selector').length).toBe(0)
+    expect($$('note-selector').length).toBe(0)
   })
 
   it('adds one new title', () => {
     ui.addTitle('foobar')
-    expect(fixture.getElementsByClassName('note-selector').length).toBe(4)
-    expect(fixture.getElementsByClassName('note-selector')[0]
-        .getElementsByClassName('note-selector-title')[0].innerText).toBe('foobar')
-    expect(fixture.getElementsByClassName('note-selector')[0].classList).toContain('active')
+    expect($$('note-selector').length).toBe(4)
+    expect($('note-selector').getElementsByClassName('note-selector-title')[0].innerText).toBe('foobar')
+    expect($('note-selector').classList).toContain('active')
   })
 
   it('clears the main text', () => {
     ui.clearMainText()
-    expect(fixture.getElementsByClassName('note-editor-input')[0].value).toBe('')
+    expect($('note-editor-input').value).toBe('')
   })
 })
