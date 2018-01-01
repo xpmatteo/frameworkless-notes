@@ -4,13 +4,11 @@ on start => copies the main text to the ui
             copies the timestamp to the main timestamp in the ui
             copies the timestamps of all notes to the ui
 
-enter text => title changes
-              title changes but only the first line
-              timestamp in main text page is updated
-              timestamp in title is also updated
-              text does not allow XSS attacks
+DONE enter text => title changes
+DONE               title changes but only the first line
+DONE               text does not allow XSS attacks
 
-select title => main text changes
+DONE select title => main text changes
                 selected title becomes active, 
                 old active title becomes inactive
 
@@ -28,3 +26,4 @@ press new, select some other title => the new note title is deleted
 searching ...
 saving and loading state to the browser memory
 deleting a note ...
+timestamps

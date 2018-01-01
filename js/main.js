@@ -1,6 +1,8 @@
 
+var ui = new NotesUiAdapter(document)
+var notesApp = new NotesApp(ui)
+ui.addListener(notesApp)
 
-var notesApp = new NotesApp(new NotesUiAdapter(document))
 notesApp.onAppStart()
 
 document.getElementById('note-editor-input').addEventListener('input', (event) => {

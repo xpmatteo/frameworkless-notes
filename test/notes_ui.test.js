@@ -76,10 +76,37 @@ describe('The Notes UI Adapter', () => {
       ui.addTitle('something')
       expect($('note-selector', 'note-selector-title').innerText).toBe('something')
     })
+
+    it('adds a listener for updating the app', () => {
+      var listener = td.object(['onSelectNote'])
+      ui.addTitle('new')
+      ui.addListener(listener)
+
+      $('note-selector').onclick()
+
+      td.verify(listener.onSelectNote(0))
+    })
+
+    it('the title selectors can find their own index', () => {
+      var listener = td.object(['onSelectNote'])
+      ui.addTitle('one')
+      ui.addTitle('two')
+      ui.addTitle('three')
+      ui.addListener(listener)
+
+      $$('note-selector')[1].onclick()
+
+      td.verify(listener.onSelectNote(1))
+    })
   })
 
   it('clears the main text', () => {
     ui.clearMainText()
     expect($('note-editor-input').value).toBe('')
+  })
+
+  it('sets the main text', () => {
+    ui.setMainText('pippo')
+    expect($('note-editor-input').value).toBe('pippo')
   })
 })

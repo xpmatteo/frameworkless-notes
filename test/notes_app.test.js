@@ -3,7 +3,7 @@ describe('the notes app', () => {
   var ui, notesApp
   
   beforeEach(() => {
-    ui = td.object(['clearTitles', 'addTitle', 'clearMainText', 'updateTitle'])
+    ui = td.object(['clearTitles', 'addTitle', 'clearMainText', 'updateTitle', 'setMainText'])
     notesApp = new NotesApp(ui)
   })
 
@@ -36,4 +36,17 @@ describe('the notes app', () => {
       td.verify(ui.updateTitle(0, 'new text'))
     })
   })
+
+  describe('when selecting another note', () => {
+    it('the main text changes', () => {
+      notesApp.onInput('first note text')
+      notesApp.onNewNote()
+      notesApp.onInput('second note text')
+
+      notesApp.onSelectNote(1)
+
+      td.verify(ui.setMainText('first note text'))
+    })
+  })
+
 })

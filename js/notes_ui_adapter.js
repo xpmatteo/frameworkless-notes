@@ -1,4 +1,10 @@
-function NotesUiAdapter(document=document) {
+function NotesUiAdapter(parentElement=document) {
+
+  var listeners = []
+
+  this.addListener = (listener) => {
+    listeners.push(listener)
+  }
 
   this.updateTitle = (index, text) => {
     $('note-selector-title', index).innerText = text
@@ -9,13 +15,24 @@ function NotesUiAdapter(document=document) {
   }
 
   this.addTitle = (text) => {
-    var newTitle = `
-      <div class="note-selector">
-        <p class="note-selector-title">${text}</p>
-      </div>
-      `
+    var newSelector = document.createElement('div')
+    newSelector.classList.add('note-selector')
+    var newTitle = document.createElement('p')
+    newTitle.classList.add('note-selector-title')
+    newTitle.innerText = text
+    newSelector.appendChild(newTitle)
+
     var container = $('note-selectors')
-    container.innerHTML = newTitle + container.innerHTML
+    container.insertBefore(newSelector, container.firstChild)
+
+    $$('note-selector').forEach((selector, index) => {
+      selector.onclick = () => { 
+        listeners.forEach((listener) => {
+          listener.onSelectNote(index)
+        })
+      }
+    })
+
     this.activateTitle(0)
   }
 
@@ -25,12 +42,16 @@ function NotesUiAdapter(document=document) {
     })
   }
 
+  this.setMainText = (text) => {
+    $('note-editor-input').value = text
+  }
+
   this.clearMainText = () => {
-    $('note-editor-input').value = ''
+    this.setMainText('')
   }
 
   function $$(className) {
-    return Array.from(document.getElementsByClassName(className))
+    return Array.from(parentElement.getElementsByClassName(className))
   }
 
   function $(className, index=0) {
