@@ -1,32 +1,28 @@
+function NotesUiAdapter(document=document) {
 
-class NotesUiAdapter {
-  constructor(document) {
-    this._document = document
+  this.updateTitle = (index, text) => {
+    $('note-selector-title', index).innerText = text
   }
 
-  updateTitle(index, text) {
-    this.$('note-selector-title', index).innerText = text
+  this.clearTitles = () => {
+    $('note-selectors').innerHTML = ''
   }
 
-  clearTitles() {
-    this.$('note-selectors').innerHTML = ''
-  }
-
-  addTitle(text) {
+  this.addTitle = (text) => {
     var newTitle = `
       <div class="note-selector active">
         <p class="note-selector-title">${text}</p>
       </div>
       `
-    var container = this.$('note-selectors')
+    var container = $('note-selectors')
     container.innerHTML = newTitle + container.innerHTML
   }
 
-  clearMainText() {
-    this.$('note-editor-input').value = ''
+  this.clearMainText = () => {
+    $('note-editor-input').value = ''
   }
 
-  $(className, index=0) {
-    return this._document.getElementsByClassName(className)[index]
+  function $(className, index=0) {
+    return document.getElementsByClassName(className)[index]
   }
 }
