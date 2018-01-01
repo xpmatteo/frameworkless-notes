@@ -33,11 +33,8 @@ describe('The Notes UI Adapter', () => {
     return element.getElementsByClassName(className)
   }
 
-  function $(outerClassName, innerClassName) {
-    if (innerClassName) {
-      return $$(innerClassName, $$(outerClassName)[0])[0]
-    }
-    return $$(outerClassName)[0]
+  function $(className) {
+    return $$(className)[0]
   }
 
   beforeEach(() => {
@@ -60,7 +57,7 @@ describe('The Notes UI Adapter', () => {
     it('adds the new title', () => {
       ui.addTitle('foobar')
       expect($$('note-selector').length).toBe(4)
-      expect($('note-selector', 'note-selector-title').innerText).toBe('foobar')
+      expect($('note-selector-title').innerText).toBe('foobar')
     })
 
     it('makes the new title the only active title', () => {
@@ -74,7 +71,7 @@ describe('The Notes UI Adapter', () => {
     it('does not break when there is only one title', () => {
       ui.clearTitles()
       ui.addTitle('something')
-      expect($('note-selector', 'note-selector-title').innerText).toBe('something')
+      expect($('note-selector-title').innerText).toBe('something')
     })
 
     it('adds a listener for updating the app', () => {
