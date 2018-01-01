@@ -16,13 +16,20 @@ function NotesUiAdapter(document=document) {
       `
     var container = $('note-selectors')
     container.innerHTML = newTitle + container.innerHTML
+    $$('note-selector').forEach((selector, index) => {
+      (index == 0) ? selector.classList.add('active') : selector.classList.remove('active')
+    })
   }
 
   this.clearMainText = () => {
     $('note-editor-input').value = ''
   }
 
+  function $$(className) {
+    return Array.from(document.getElementsByClassName(className))
+  }
+
   function $(className, index=0) {
-    return document.getElementsByClassName(className)[index]
+    return $$(className)[index]
   }
 }

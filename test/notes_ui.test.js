@@ -29,12 +29,15 @@ describe('The Notes UI Adapter', () => {
   var fixture
   var ui
 
-  function $$(className) {
-    return fixture.getElementsByClassName(className)
+  function $$(className, element=fixture) {
+    return element.getElementsByClassName(className)
   }
 
-  function $(className) {
-    return $$(className)[0]
+  function $(outerClassName, innerClassName) {
+    if (innerClassName) {
+      return $$(innerClassName, $$(outerClassName)[0])[0]
+    }
+    return $$(outerClassName)[0]
   }
 
   beforeEach(() => {
@@ -53,11 +56,26 @@ describe('The Notes UI Adapter', () => {
     expect($$('note-selector').length).toBe(0)
   })
 
-  it('adds one new title', () => {
-    ui.addTitle('foobar')
-    expect($$('note-selector').length).toBe(4)
-    expect($('note-selector').getElementsByClassName('note-selector-title')[0].innerText).toBe('foobar')
-    expect($('note-selector').classList).toContain('active')
+  describe('When adding a new title', () => {
+    it('adds the new title', () => {
+      ui.addTitle('foobar')
+      expect($$('note-selector').length).toBe(4)
+      expect($('note-selector', 'note-selector-title').innerText).toBe('foobar')
+    })
+
+    it('makes the new title the only active title', () => {
+      ui.addTitle('something')
+      expect($$('note-selector')[0].classList).toContain('active')
+      expect($$('note-selector')[1].classList).not.toContain('active')
+      expect($$('note-selector')[2].classList).not.toContain('active')
+      expect($$('note-selector')[3].classList).not.toContain('active')
+    })
+
+    it('does not break when there is only one title', () => {
+      ui.clearTitles()
+      ui.addTitle('foobar')
+      expect($('note-selector', 'note-selector-title').innerText).toBe('foobar')
+    })
   })
 
   it('clears the main text', () => {

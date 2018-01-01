@@ -14,5 +14,10 @@ class NotesApp {
   onInput(text) {
     this._ui.updateTitle(0, text.split('\n')[0])
   }
+
+  onNewNote(text) {
+    this._ui.addTitle('New Note')
+    this._ui.clearMainText()
+  }
 }
 
