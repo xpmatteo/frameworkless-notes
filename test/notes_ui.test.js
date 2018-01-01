@@ -73,8 +73,8 @@ describe('The Notes UI Adapter', () => {
 
     it('does not break when there is only one title', () => {
       ui.clearTitles()
-      ui.addTitle('foobar')
-      expect($('note-selector', 'note-selector-title').innerText).toBe('foobar')
+      ui.addTitle('something')
+      expect($('note-selector', 'note-selector-title').innerText).toBe('something')
     })
   })
 

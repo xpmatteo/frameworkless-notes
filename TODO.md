@@ -17,9 +17,9 @@ select title => main text changes
 select title and enter text => the new title becomes topmost
                                the correct note is being modified permanently
 
-press new => main text becomes blank
-             there is a new title in the topmost position
-             and the title is "New Note"
+DONE press new => main text becomes blank
+DONE             there is a new title in the topmost position
+DONE             and the title is "New Note"
 
 press new, select some other title => the new note title is deleted
                                       the note that was on top before the "new" returns on top

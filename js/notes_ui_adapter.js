@@ -10,14 +10,18 @@ function NotesUiAdapter(document=document) {
 
   this.addTitle = (text) => {
     var newTitle = `
-      <div class="note-selector active">
+      <div class="note-selector">
         <p class="note-selector-title">${text}</p>
       </div>
       `
     var container = $('note-selectors')
     container.innerHTML = newTitle + container.innerHTML
+    this.activateTitle(0)
+  }
+
+  this.activateTitle = (activeIndex) => {
     $$('note-selector').forEach((selector, index) => {
-      (index == 0) ? selector.classList.add('active') : selector.classList.remove('active')
+      (index == activeIndex) ? selector.classList.add('active') : selector.classList.remove('active')
     })
   }
 
