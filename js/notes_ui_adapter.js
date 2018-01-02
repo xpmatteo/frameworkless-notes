@@ -14,17 +14,21 @@ function NotesUiAdapter(parentElement=document) {
     $('note-selectors').innerHTML = ''
   }
 
-  this.addTitle = (text) => {
-    var newSelector = document.createElement('div')
-    newSelector.classList.add('note-selector')
-    var newTitle = document.createElement('p')
-    newTitle.classList.add('note-selector-title')
-    newTitle.innerText = text
-    newSelector.appendChild(newTitle)
+  function makeDiv(className, content) {
+    var div = document.createElement('div')
+    div.classList.add(className)
+    div.appendChild(content)
+    return div
+  }
 
-    var container = $('note-selectors')
-    container.insertBefore(newSelector, container.firstChild)
+  function makeParagraph(className, text) {
+    var p = document.createElement('p')
+    p.classList.add(className)
+    p.innerText = text
+    return p
+  }
 
+  function setSelectorListeners() {
     $$('note-selector').forEach((selector, index) => {
       selector.onclick = () => { 
         listeners.forEach((listener) => {
@@ -32,8 +36,17 @@ function NotesUiAdapter(parentElement=document) {
         })
       }
     })
+  }
+
+  this.addTitle = (text) => {
+    var newTitle = makeParagraph('note-selector-title', text)
+    var newSelector = makeDiv('note-selector', newTitle)
+
+    var container = $('note-selectors')
+    container.insertBefore(newSelector, container.firstChild)
 
     this.activateTitle(0)
+    setSelectorListeners()
   }
 
   this.activateTitle = (activeIndex) => {
