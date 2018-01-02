@@ -24,6 +24,7 @@ class NotesApp {
 
   onSelectNote(index) {
     this._ui.setMainText(this._notes[index])
+    this._ui.activateTitle(index)
   }
 }
 

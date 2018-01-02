@@ -3,7 +3,7 @@ describe('the notes app', () => {
   var ui, notesApp
   
   beforeEach(() => {
-    ui = td.object(['clearTitles', 'addTitle', 'clearMainText', 'updateTitle', 'setMainText'])
+    ui = td.object(['clearTitles', 'addTitle', 'clearMainText', 'updateTitle', 'setMainText', 'activateTitle'])
     notesApp = new NotesApp(ui)
   })
 
@@ -46,6 +46,14 @@ describe('the notes app', () => {
       notesApp.onSelectNote(1)
 
       td.verify(ui.setMainText('first note text'))
+    })
+
+    it('the title becomes active', () => {
+      notesApp.onNewNote()
+      
+      notesApp.onSelectNote(1)
+
+      td.verify(ui.activateTitle(1))
     })
   })
 
