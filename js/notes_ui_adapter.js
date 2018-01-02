@@ -55,6 +55,13 @@ function NotesUiAdapter(parentElement=document) {
     })
   }
 
+  this.moveTitleToTop = (index) => {
+    var title = $$('note-selector')[index]
+    var container = $('note-selectors')
+    container.insertBefore(title, container.firstChild)
+    setSelectorListeners()
+  }
+
   this.setMainText = (text) => {
     $('note-editor-input').value = text
   }

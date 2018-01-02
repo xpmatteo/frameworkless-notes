@@ -30,7 +30,7 @@ describe('The Notes UI Adapter', () => {
   var ui
 
   function $$(className, element=fixture) {
-    return element.getElementsByClassName(className)
+    return Array.from(element.getElementsByClassName(className))
   }
 
   function $(className) {
@@ -105,5 +105,39 @@ describe('The Notes UI Adapter', () => {
   it('sets the main text', () => {
     ui.setMainText('pippo')
     expect($('note-editor-input').value).toBe('pippo')
+  })
+
+  describe('moving the selected note on top', () => {
+    beforeEach(() => {
+      expect($$('note-selector-title').map(el => el.innerText)).toEqual(
+        ['First note...', 'Second note...', 'Third note...']
+      )
+
+      ui.moveTitleToTop(2)
+    })
+    
+    it('moves the text', () => {
+      expect($$('note-selector-title').map(el => el.innerText)).toEqual(
+        ['Third note...', 'First note...', 'Second note...']
+      )
+    })
+
+    xit('moves the active status', () => {
+      expect($$('note-selector')[0].classList).toContain('active')
+    })
+
+    it('resets the event listeners', () => {
+      var listener = td.object(['onSelectNote'])
+      ui.addListener(listener)
+
+      $$('note-selector')[0].onclick()
+      td.verify(listener.onSelectNote(0))
+
+      $$('note-selector')[1].onclick()
+      td.verify(listener.onSelectNote(1))
+
+      $$('note-selector')[2].onclick()
+      td.verify(listener.onSelectNote(2))
+    })
   })
 })

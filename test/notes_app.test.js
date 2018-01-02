@@ -3,7 +3,8 @@ describe('the notes app', () => {
   var ui, notesApp
   
   beforeEach(() => {
-    ui = td.object(['clearTitles', 'addTitle', 'clearMainText', 'updateTitle', 'setMainText', 'activateTitle'])
+    ui = td.object(['clearTitles', 
+      'addTitle', 'clearMainText', 'updateTitle', 'setMainText', 'activateTitle', 'moveTitleToTop'])
     notesApp = new NotesApp(ui)
   })
 
@@ -55,6 +56,32 @@ describe('the notes app', () => {
 
       td.verify(ui.activateTitle(1))
     })
-  })
 
+    describe('when new input comes', () => {
+      beforeEach(() => {
+        notesApp.onInput('first note')
+        notesApp.onNewNote()
+        notesApp.onInput('second note')
+        notesApp.onNewNote()
+        notesApp.onInput('third note')
+
+        expect(notesApp.note(0)).toBe('third note')
+        expect(notesApp.note(1)).toBe('second note')
+        expect(notesApp.note(2)).toBe('first note')
+
+        notesApp.onSelectNote(2)
+        notesApp.onInput('changing the first note')
+      })
+
+      it('moves the selected note to the first position', () => {
+        td.verify(ui.moveTitleToTop(2))
+      })
+
+      it('adds the text to the proper note', () => {
+        expect(notesApp.note(0)).toBe('changing the first note')
+        expect(notesApp.note(1)).toBe('third note')
+        expect(notesApp.note(2)).toBe('second note')
+      })
+    })
+  })
 })
