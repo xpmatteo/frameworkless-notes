@@ -1,6 +1,8 @@
 Exercise inspired by https://medium.com/@peterxjang/comparing-frontend-frameworks-part-1-introduction-6cf3d49e42cf
 
-Testing:
+In fact, the html and css templates are shamelessly copied from Peter Xjang's
+
+## Testing:
 
     karma start
 
@@ -8,7 +10,7 @@ Testing:
 
 
 
-Setting up a new project:
+## Setting up a new project:
 
   - npm init -y
   - npm install karma --save-dev
