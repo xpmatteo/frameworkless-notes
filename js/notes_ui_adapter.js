@@ -1,5 +1,4 @@
 function NotesUiAdapter(parentElement=document) {
-
   var listeners = []
 
   this.addListener = (listener) => {
@@ -47,6 +46,7 @@ function NotesUiAdapter(parentElement=document) {
 
     this.activateTitle(0)
     setSelectorListeners()
+    $('note-editor-input').focus()
   }
 
   this.activateTitle = (activeIndex) => {
